@@ -1,3 +1,5 @@
+import myCloc.FileWalker;
+import myCloc.MyFolder;
 import org.junit.Test;
 import myCloc.MyFile;
 
@@ -15,5 +17,17 @@ public class Justatest {
         File root1 = new File(path);
         f.readFromFile(root1);
         f.outputFile();
+    }
+
+    @Test
+    public void testNumOfRows() {
+        FileWalker fw = new FileWalker();
+        fw.walk("C:\\Users\\Peter\\作业\\高程\\Mycloc");
+        MyFolder folder0 = fw.getFolder();
+        for (Object f : folder0) {
+            MyFile f1 = (MyFile) f;
+            int x = f1.getNumOfRows();
+            System.out.println(f1.gerFilename()+" "+x);
+        }
     }
 }

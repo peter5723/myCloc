@@ -28,7 +28,9 @@ public class MyFile {
     public int getNumOfRows() {
         return numOfRows;
     }
-
+    public String gerFilename() {
+        return this.filename;
+    }
     public void readFromFile(File f) {
         if (!f.isFile()) {
             return;
@@ -49,8 +51,21 @@ public class MyFile {
             e.printStackTrace();
         }
         this.contents = myString.toString();
+        this.numOfRows = countLines(this.contents);
     }
     public void outputFile() {
         System.out.println(contents);
     }
+
+    /*@source
+    https://stackoverflow.com/questions/2850203/count-the-number-of-lines-in-a-java-string
+     */
+    private static int countLines(String str) {
+        String[] lines = str.split("\r\n|\r|\n");
+        return  lines.length;
+    }
 }
+
+
+
+

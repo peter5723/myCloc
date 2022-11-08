@@ -1,7 +1,9 @@
 package myCloc;
 
 import java.util.ArrayList;
-public class MyFolder  {
+import java.util.Iterator;
+
+public class MyFolder implements Iterable {
     private String folderName;
     private int numOfFiles;
     private int numOfRows;
@@ -24,13 +26,30 @@ public class MyFolder  {
     }
 
     public int getNumOfRows() {
-        int tmp = 0;
-        for (MyFile f:folder) {
-            tmp += f.getNumOfRows();
-        }
-        return tmp;
+        return numOfRows;
     }
 
 
+    @Override
+    public Iterator iterator() {
+        return new FileIterator();
+    }
+    private class FileIterator implements Iterator {
+        private int nowPos;
 
+        public FileIterator() {
+            nowPos = 0;
+        }
+        @Override
+        public boolean hasNext() {
+            return nowPos < folder.size();
+        }
+
+        @Override
+        public Object next() {
+            Object fileReturn = folder.get(nowPos);
+            nowPos++;
+            return fileReturn;
+        }
+    }
 }

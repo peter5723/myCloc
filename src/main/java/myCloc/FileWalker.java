@@ -33,6 +33,10 @@ public class FileWalker {
         }
     }
 
+    public MyFolder getFolder() {
+        return folder;
+    }
+
     public static void main(String[] args) {
         FileWalker fw = new FileWalker();
         fw.walk("C:\\Users\\Peter\\作业\\skeleton-sp21-master\\proj1" );
