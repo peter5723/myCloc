@@ -1,6 +1,5 @@
-package MyCloc;
+package myCloc;
 
-import java.util.Iterator;
 import java.util.ArrayList;
 public class MyFolder  {
     private String folderName;
@@ -8,16 +7,16 @@ public class MyFolder  {
     private int numOfRows;
     private ArrayList<MyFile> folder;
 
-    public MyFolder(String folderName) {
+    public MyFolder() {
         numOfFiles = 0;
         numOfRows = 0;
-        this.folderName = folderName;
         folder = new ArrayList<MyFile>();
     }
 
     public void addFile(MyFile f) {
         folder.add(f);
         numOfFiles++;
+        numOfRows += f.getNumOfRows();
     }
 
     public int getNumOfFiles() {
