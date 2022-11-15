@@ -1,13 +1,14 @@
 package myCloc;
 //@Source https://stackoverflow.com/questions/2056221/recursively-list-files-in-java
 import java.io.File;
+import java.io.IOException;
 
 public class FileWalker {
     private MyFolder folder;
     public FileWalker() {
         folder = new MyFolder();
     }
-    public void walk( String path ) {
+    public void walk( String path ) throws IOException {
 
         File root = new File( path );
         File[] list = root.listFiles();
@@ -37,7 +38,7 @@ public class FileWalker {
         return folder;
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
         FileWalker fw = new FileWalker();
         fw.walk("C:\\Users\\Peter\\作业\\skeleton-sp21-master\\proj1" );
     }

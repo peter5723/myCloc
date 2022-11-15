@@ -1,7 +1,9 @@
 package myCloc;
 
-import java.io.File;
-import java.io.FileNotFoundException;
+import java.io.*;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.Scanner;
 
 public class MyFile {
@@ -21,17 +23,20 @@ public class MyFile {
     }
 
     private int getRowsOfContents(String contents) {
-        //TODO:calculate the RowsOfContents
-        return 0;
+        return countLines(contents);
     }
 
     public int getNumOfRows() {
         return numOfRows;
     }
-    public String gerFilename() {
+
+    public int getNumOfEmptyRows() throws IOException {
+        return countEmptyLines(contents);
+    }
+    public String getFilename() {
         return this.filename;
     }
-    public void readFromFile(File f) {
+    public void readFromFile(File f) throws IOException {
         if (!f.isFile()) {
             return;
         }
@@ -61,8 +66,29 @@ public class MyFile {
     https://stackoverflow.com/questions/2850203/count-the-number-of-lines-in-a-java-string
      */
     private static int countLines(String str) {
-        String[] lines = str.split("\r\n|\r|\n");
-        return  lines.length;
+        if(str == null || str.isEmpty())
+        {
+            return 0;
+        }
+        int lines = 1;
+        int pos = 0;
+        while ((pos = str.indexOf("\n", pos) + 1) != 0) {
+            lines++;
+        }
+        return lines;
+    }
+
+    //TODO: 修改计算空行的办法。总行数应该是对的了
+    private static int countEmptyLines(String str) throws IOException {
+        final BufferedReader br = new BufferedReader(new StringReader(str));
+        String line;
+        int empty = 0;
+        while ((line = br.readLine()) != null) {
+            if (line.trim().isEmpty()) {
+                empty++;
+            }
+        }
+        return empty;
     }
 }
 
