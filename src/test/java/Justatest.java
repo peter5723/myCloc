@@ -6,6 +6,7 @@ import myCloc.MyFile;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.regex.Pattern;
 
 public class Justatest {
     @Test
@@ -59,6 +60,19 @@ public class Justatest {
         String path = "./src/test/testFile/testComment.java";
         File root1 = new File(path);
         f.readFromFile(root1);
-        Assert.assertEquals(7, f.getCommentLines());
+        Assert.assertEquals(15, f.getCommentLines());
+    }
+
+    @Test
+    public void testRegex1() {
+        String line = "/*just test";
+        String regex = "/\\*.*";
+        Assert.assertTrue(Pattern.matches(regex,line));
+    }
+    @Test
+    public void testRegex2() {
+        String line = "//a comment";
+        String regex = ".*//.*";
+        Assert.assertTrue(Pattern.matches(regex,line));
     }
 }

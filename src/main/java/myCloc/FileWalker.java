@@ -38,10 +38,6 @@ public class FileWalker {
         return folder;
     }
 
-    public static void main(String[] args) throws IOException {
-        FileWalker fw = new FileWalker();
-        fw.walk("C:\\Users\\Peter\\作业\\skeleton-sp21-master\\proj1" );
-    }
 
 }
 

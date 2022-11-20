@@ -1,10 +1,8 @@
 package myCloc;
 //若一行是里面没有内容的空白行，换行也没有，这一行不计算在内；比如说空文件
 import java.io.*;
-import java.nio.charset.StandardCharsets;
-import java.nio.file.Files;
-import java.nio.file.Paths;
 import java.util.Scanner;
+import java.util.regex.Pattern;
 
 public class MyFile {
     private String filename;
@@ -116,16 +114,21 @@ public class MyFile {
         BufferedReader br = new BufferedReader(new StringReader(str));
         String line;
         while ((line = br.readLine())!=null) {
-            if (line.startsWith("/*")) {
+            String regexLine = "^\\s*/\\*.*";
+            //懂了，matches方法要完全匹配才会返回TRUE。
+            if (Pattern.matches(regexLine, line)) {
                 commentCount++;
                 while ((line = br.readLine())!=null) {
-                    commentCount++;
+                    if(!line.trim().isEmpty()) {
+                        commentCount++;
+                        //注释中的空行不计入注释行
+                    }
                     if (line.endsWith("*/")) {
                         break;
                     }
                 }
             }
-            else if (line.startsWith("//")) {
+            else if (Pattern.matches("^\\s*//.*", line)) {
                 commentCount++;
             }
 
