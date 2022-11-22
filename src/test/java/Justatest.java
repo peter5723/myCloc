@@ -12,7 +12,7 @@ public class Justatest {
     @Test
     public void justTest(){
         System.out.print("helllo!!!!");
-    }//test
+    }
     @Test
     public void testReadFile() throws IOException {
         MyFile f = new MyFile();
@@ -24,7 +24,7 @@ public class Justatest {
     @Test
     public void readBlankFile() throws IOException {
         MyFile f = new MyFile();
-        String path = ".\\src\\test\\java\\a.txt";
+        String path = ".\\src\\test\\testFile\\a.txt";
         File root1 = new File(path);
         f.readFromFile(root1);
         //f.outputFile();
@@ -74,5 +74,23 @@ public class Justatest {
         String line = "//a comment";
         String regex = ".*//.*";
         Assert.assertTrue(Pattern.matches(regex,line));
+    }
+    //cloc是有bug的，测试这个文件时，发现String regex = ".*//.*";这句让它计算抽风了，就不用他作为测试依据了
+    @Test
+    public void testCommandMyFile() throws IOException {
+        MyFile f = new MyFile();
+        String path = "./src/main/java/myCloc/MyFile.java";
+        File root1 = new File(path);
+        f.readFromFile(root1);
+        Assert.assertEquals(10, f.getCommentLines());
+    }
+    @Test
+    public void testThisProj() throws IOException {
+        FileWalker fw = new FileWalker();
+        fw.walk(".");
+        Assert.assertEquals(6,fw.getFolder().getNumOfFiles());
+        Assert.assertEquals(43,fw.getFolder().getNumOfEmptyLines());
+        Assert.assertEquals(32,fw.getFolder().getNumOfCommandLines());
+        Assert.assertEquals(326,fw.getFolder().getNumOfCodeLines());
     }
 }
