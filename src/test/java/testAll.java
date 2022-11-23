@@ -56,4 +56,53 @@ public class testAll {
         Assert.assertEquals(6, fw.getFolder().getNumOfEmptyLines());
         Assert.assertEquals(1,fw.getFolder().getNumOfFiles());
     }
+    @Test
+    public void testOneFolder() throws IOException {
+        FileWalker fw = new FileWalker();
+        fw.walk("src/test/testFile/folderOneFile");
+        Assert.assertEquals(5,fw.getFolder().getNumOfCodeLines());
+        Assert.assertEquals(1,fw.getFolder().getNumOfCommandLines());
+        Assert.assertEquals(1, fw.getFolder().getNumOfEmptyLines());
+        Assert.assertEquals(1,fw.getFolder().getNumOfFiles());
+    }
+
+    @Test
+    public void oneFolderWithMulFiles() throws IOException {
+        FileWalker fw = new FileWalker();
+        fw.walk("src/test/testFile/folderMulFiles");
+        Assert.assertEquals(8,fw.getFolder().getNumOfCodeLines());
+        Assert.assertEquals(4,fw.getFolder().getNumOfCommandLines());
+        Assert.assertEquals(5, fw.getFolder().getNumOfEmptyLines());
+        Assert.assertEquals(3,fw.getFolder().getNumOfFiles());
+    }
+
+    @Test
+    public void mulFolders() throws IOException {
+        FileWalker fw = new FileWalker();
+        fw.walk("src/test/testFile/folderMulFolders");
+        Assert.assertEquals(12,fw.getFolder().getNumOfCodeLines());
+        Assert.assertEquals(16,fw.getFolder().getNumOfCommandLines());
+        Assert.assertEquals(7, fw.getFolder().getNumOfEmptyLines());
+        Assert.assertEquals(2,fw.getFolder().getNumOfFiles());
+    }
+
+    @Test
+    public void mulFoldersAndFiles() throws IOException {
+        FileWalker fw = new FileWalker();
+        fw.walk("src/test/testFile/mulFoldersAndFiles");
+        Assert.assertEquals(22,fw.getFolder().getNumOfCodeLines());
+        Assert.assertEquals(9,fw.getFolder().getNumOfCommandLines());
+        Assert.assertEquals(4, fw.getFolder().getNumOfEmptyLines());
+        Assert.assertEquals(3,fw.getFolder().getNumOfFiles());
+    }
+
+    @Test
+    public void javaAndOther() throws IOException {
+        FileWalker fw = new FileWalker();
+        fw.walk("src/test/testFile/javaAndOther");
+        Assert.assertEquals(11,fw.getFolder().getNumOfCodeLines());
+        Assert.assertEquals(7,fw.getFolder().getNumOfCommandLines());
+        Assert.assertEquals(1, fw.getFolder().getNumOfEmptyLines());
+        Assert.assertEquals(2,fw.getFolder().getNumOfFiles());
+    }
 }
