@@ -70,12 +70,12 @@ public class testPart {
     }
     //cloc是有bug的，测试这个文件时，发现String regex = ".*//.*";这句让它计算抽风了，就不用他作为测试依据了
     @Test
-    public void testCommandMyFile() throws IOException {
+    public void testCommentMyFile() throws IOException {
         MyFile f = new MyFile();
         String path = "./src/main/java/myCloc/MyFile.java";
         File root1 = new File(path);
         f.readFromFile(root1);
-        Assert.assertEquals(10, f.getCommentLines());
+        Assert.assertEquals(5, f.getCommentLines());
     }
     @Test
     public void testThisProj() throws IOException {

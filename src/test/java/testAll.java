@@ -105,4 +105,14 @@ public class testAll {
         Assert.assertEquals(1, fw.getFolder().getNumOfEmptyLines());
         Assert.assertEquals(2,fw.getFolder().getNumOfFiles());
     }
+
+    @Test
+    public void testComment2() throws IOException {
+        FileWalker fw = new FileWalker();
+        fw.walk("src/test/testFile/testComment2.java");
+        Assert.assertEquals(3,fw.getFolder().getNumOfCodeLines());
+        Assert.assertEquals(8,fw.getFolder().getNumOfCommandLines());
+        Assert.assertEquals(3, fw.getFolder().getNumOfEmptyLines());
+        Assert.assertEquals(1,fw.getFolder().getNumOfFiles());
+    }
 }
